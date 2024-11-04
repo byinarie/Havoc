@@ -10,8 +10,7 @@ all: ts-build client-build
 ts-build:
 	@ echo "[*] Building Teamserver"
 	@ ./teamserver/Install.sh
-	@ cd teamserver; GO111MODULE="on" go build -ldflags="-s -w -X cmd.VersionCommit=$(git rev-parse HEAD)" -o ../havoc main.go
-	@ sudo setcap 'cap_net_bind_service=+ep' havoc # this allows you to run the server as a regular user
+	@ make -C teamserver ts-build
 
 dev-ts-compile:
 	@ echo "[*] Compile Teamserver"
@@ -48,5 +47,4 @@ client-cleanup:
 
 # cleanup target
 clean: ts-cleanup client-cleanup
-	@ rm -rf ./data/*.db
 	@ rm -rf payloads/Demon/.idea
