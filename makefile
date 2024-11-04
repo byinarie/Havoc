@@ -8,20 +8,20 @@ all: ts-build client-build
 
 # teamserver building target
 ts-build:
-	@ echo "[*] building teamserver"
+	@ echo "[*] Building Teamserver"
 	@ ./teamserver/Install.sh
 	@ cd teamserver; GO111MODULE="on" go build -ldflags="-s -w -X cmd.VersionCommit=$(git rev-parse HEAD)" -o ../havoc main.go
 	@ sudo setcap 'cap_net_bind_service=+ep' havoc # this allows you to run the server as a regular user
 
 dev-ts-compile:
-	@ echo "[*] compile teamserver"
-	@ cd teamserver; GO111MODULE="on" go build -ldflags="-s -w -X cmd.VersionCommit=$(git rev-parse HEAD)" -o ../havoc main.go 
+	@ echo "[*] Compile Teamserver"
+	@ cd teamserver; GO111MODULE="on" go build -ldflags="-s -w -X cmd.VersionCommit=$(git rev-parse HEAD)" -o ../havoc main.go
 
-ts-cleanup: 
-	@ echo "[*] teamserver cleanup"
+ts-cleanup:
+	@ echo "[*] Teamserver Cleanup"
 	@ rm -rf ./teamserver/bin
 	@ rm -rf ./data/loot
-	@ rm -rf ./data/x86_64-w64-mingw32-cross 
+	@ rm -rf ./data/x86_64-w64-mingw32-cross
 	@ rm -rf ./data/havoc.db
 	@ rm -rf ./data/server.*
 	@ rm -rf ./teamserver/.idea
@@ -36,7 +36,7 @@ client-build:
 	@ cmake --build client/Build -- -j 4
 
 client-cleanup:
-	@ echo "[*] client cleanup"
+	@ echo "[*] Client Cleanup"
 	@ rm -rf ./client/Build
 	@ rm -rf ./client/Bin/*
 	@ rm -rf ./client/Data/database.db
@@ -46,7 +46,7 @@ client-cleanup:
 	@ rm -rf ./client/Modules
 
 
-# cleanup target 
+# cleanup target
 clean: ts-cleanup client-cleanup
 	@ rm -rf ./data/*.db
 	@ rm -rf payloads/Demon/.idea
