@@ -268,12 +268,7 @@ void HavocNamespace::UserInterface::HavocUi::UpdateSessionsHealth()
             continue;
 
         auto Now  = QDateTime::currentDateTimeUtc();
-        auto backupTimeSpec = session.LastUTC.timeSpec();
-        // switch to UTC TimeSpec before diff
-        session.LastUTC.setTimeSpec(Qt::UTC);
         auto diff = session.LastUTC.secsTo( Now );
-        // switch back previous TimeSpec after diff
-        session.LastUTC.setTimeSpec(backupTimeSpec);
 
         auto seconds = QDateTime::fromTime_t( diff ).toUTC().toString("s");
         auto minutes = QDateTime::fromTime_t( diff ).toUTC().toString("m");
@@ -618,4 +613,3 @@ void UserInterface::HavocUi::PythonPrepare()
         Widgets::ScriptManager::AddScript( ScriptPath );
     }
 }
-
